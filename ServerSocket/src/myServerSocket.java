@@ -47,7 +47,7 @@ public class myServerSocket {
 			receive.start();
 			
 			SendThread send = new SendThread(sock);
-			send.start();
+//			send.start();
 		}
 
 	}

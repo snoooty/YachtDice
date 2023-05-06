@@ -8,6 +8,7 @@ import java.net.SocketException;
 public class SendThread extends Thread{
 	
 	private Socket sock;
+	String s;
 	
 	public SendThread(Socket sock){
 	    this.sock = sock;
@@ -15,9 +16,9 @@ public class SendThread extends Thread{
 	
 	@Override
 	public void run() {
+		System.out.println(sock);
 		try {
 			PrintStream out = new PrintStream(sock.getOutputStream());
-			String s;
 			while(true) {
 				out.println("보내는 메세지");
 				out.flush();
