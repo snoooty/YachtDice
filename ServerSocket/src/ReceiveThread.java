@@ -25,7 +25,7 @@ public class ReceiveThread extends Thread{
 				if(s == null) break;
 				System.out.println("유저 : " + s);
 			}
-			System.out.println("Receive : 연결이 끊겼습니다.");
+			System.out.println(sock + "Receive : 연결이 끊겼습니다.");
 		} catch(SocketException e1) {
 			System.out.println("Receive : 상대방 연결이 종료되었습니다.");
 		} catch (IOException e) {

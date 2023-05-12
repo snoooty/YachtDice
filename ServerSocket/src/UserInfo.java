@@ -8,11 +8,25 @@ import java.net.Socket;
 
 public class UserInfo extends Thread{
 	
+	GameRoom room;
 	BufferedReader in = null;
 //	PrintWriter out = null;
 	PrintStream out = null;
 	Socket sock = null;
 	String user_name = null;
+	
+	public UserInfo() {
+		
+	}
+	
+	public UserInfo(String user_name) {// name 가지고 생성
+		this.user_name = user_name;
+	}
+	
+	public void enterRoom(GameRoom room) {// 룸에 입장
+		room.enterRoom(this);
+		this.room = room;
+	}
 	
 		public UserInfo(Socket sock) {
 			this.sock = sock;

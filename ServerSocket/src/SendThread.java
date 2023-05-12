@@ -4,11 +4,13 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Scanner;
 
 public class SendThread extends Thread{
 	
 	private Socket sock;
 	String s;
+	Scanner sc = new Scanner(System.in);
 	
 	public SendThread(Socket sock){
 	    this.sock = sock;
@@ -20,7 +22,9 @@ public class SendThread extends Thread{
 		try {
 			PrintStream out = new PrintStream(sock.getOutputStream());
 			while(true) {
-				out.println("보내는 메세지");
+				s = sc.nextLine();
+				System.out.println("보내는 내용 : " + s);
+				out.println(s);
 				out.flush();
 			}
 		}catch(SocketException e2) {
