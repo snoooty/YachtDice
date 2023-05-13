@@ -28,10 +28,11 @@ public class ReceiveThread extends Thread{
 			System.out.println(sock + "Receive : 연결이 끊겼습니다.");
 		} catch(SocketException e1) {
 			System.out.println("Receive : 상대방 연결이 종료되었습니다.");
+			e1.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 
 }

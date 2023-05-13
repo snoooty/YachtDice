@@ -14,14 +14,7 @@ public class UserInfo extends Thread{
 	PrintStream out = null;
 	Socket sock = null;
 	String user_name = null;
-	
-	public UserInfo() {
-		
-	}
-	
-	public UserInfo(String user_name) {// name 가지고 생성
-		this.user_name = user_name;
-	}
+	String sm;
 	
 	public void enterRoom(GameRoom room) {// 룸에 입장
 		room.enterRoom(this);
@@ -44,8 +37,10 @@ public class UserInfo extends Thread{
 			try {
 				user_name = in.readLine();
 				System.out.println("유저이름 : " + user_name);
-				out.println(user_name + "님이 접속하였습니다.");
+				sm = "Server알림" + "//" + user_name + "님이 접속하였습니다.";
+				out.println(sm);
 				out.flush();
+//				out.close();
 			}catch (Exception e){
 				e.printStackTrace();
 			}

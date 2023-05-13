@@ -22,8 +22,8 @@ public class myServerSocket {
 		
 		// 서버소켓을 생성합니다.
 		ServerSocket ssk = new ServerSocket(port);  // 서버 자신의 포트를 설정합니다.
-		RoomManager roomManager = new RoomManager();
-		GameRoom room = new GameRoom();
+//		RoomManager roomManager = new RoomManager();
+//		GameRoom room = new GameRoom();
 		
 		
 		System.out.println("접속대기중 입니다.");
@@ -42,20 +42,9 @@ public class myServerSocket {
 			UserInfo userinfo = new UserInfo(sock);
 			userinfo.start();
 			
-			userinfo.enterRoom(room);
-			room.enterRoom(userinfo);
-			roomManager.createRoom();
-			room.setRoomName(userinfo.user_name);
-			try {
-				Thread.sleep(10L);
-				userinfo.interrupt();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	       
-			ReceiveThread receive = new ReceiveThread(sock);
-			receive.start();
+//			ReceiveThread receive = new ReceiveThread(sock);
+//			receive.start();
 			
 			SendThread send = new SendThread(sock);
 			send.start();
