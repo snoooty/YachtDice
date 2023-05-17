@@ -3,20 +3,22 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Vector;
 
 
 public class myServerSocket {
 	
-	PrintWriter out = null;
+	static ArrayList<Socket> users = new ArrayList<Socket>();
+//	static Vector<Socket> users = new Vector<Socket>();
 	
-	public myServerSocket(PrintWriter out) {
-		this.out = out;
-	}
+//	public myServerSocket() {
+//		
+//	}
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-		myServerSocket mss = new myServerSocket(null);
 		
 		int port = 6000;
 		
@@ -36,20 +38,21 @@ public class myServerSocket {
 			+ "포트에" + sock.getLocalAddress()+"의 "+sock.getLocalPort()
 			+ "포트로 연결되었습니다.");
 			System.out.println("접속시간 : " + LocalTime.now());
+			users.add(sock); // 소켓 벡터에 추가
+			System.out.println("main list.size()" + users.size());
 			
 //			RoomManager roomManager = new RoomManager(sock);
 			
-			UserInfo userinfo = new UserInfo(sock);
-			userinfo.start();
+//			UserInfo userinfo = new UserInfo(sock, users);
+//			userinfo.start();
 			
 	       
 //			ReceiveThread receive = new ReceiveThread(sock);
 //			receive.start();
 			
-			SendThread send = new SendThread(sock);
+			SendThread send = new SendThread(sock, users);
 			send.start();
 		}
 
 	}
-
 }
