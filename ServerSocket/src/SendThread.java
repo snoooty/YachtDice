@@ -6,7 +6,6 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
 
 public class SendThread extends Thread{
 	
@@ -28,7 +27,7 @@ public class SendThread extends Thread{
 	
 	@Override
 	public void run() {
-		System.out.println("시작할때 sock : " + sock);
+		System.out.println("통신 시작할때 sock : " + sock);
 		try {
 			in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			user_name = in.readLine();
@@ -61,7 +60,6 @@ public class SendThread extends Thread{
 							out.flush();
 //							out.close();
 						}
-						
 					}
 				}
 			}
@@ -74,5 +72,6 @@ public class SendThread extends Thread{
 			e.printStackTrace();
 		}
 		System.out.println("대화 끝?");
+		users.remove(sock);
 	}
 }

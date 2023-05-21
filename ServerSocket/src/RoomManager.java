@@ -1,4 +1,3 @@
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +9,9 @@ public class RoomManager {
 		roomList = new ArrayList<GameRoom>();
 	}
 	
-	public GameRoom createRoom() {
-		GameRoom room = new GameRoom();
+	public void createRoom(GameRoom room) {
 		roomList.add(room);
-		System.out.println("방이 생겼습니다.");
-		return room;
+		System.out.println("방이 방 리스트에 들어감");
 	}
 	
 	public void removeRoom(GameRoom room) {
@@ -25,5 +22,8 @@ public class RoomManager {
 	public int roomCount() {
 		return roomList.size();
 	}
-
+	
+	public int roomUserSize() {
+		return roomList.get(roomList.size() - 1).GetUserSize();
+	}
 }
