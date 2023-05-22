@@ -26,6 +26,6 @@ public class UserInfo{
 		}
 		
 		public int getRoomNum() {
-			return roomNum;
+			return gameRoom.getRoomNum();
 		}
 }

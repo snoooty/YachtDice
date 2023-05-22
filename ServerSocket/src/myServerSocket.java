@@ -41,19 +41,21 @@ public class myServerSocket {
 			
 						
 			user.enterRoom(gameRoom);// 유저 방에입장
-			gameRoom.enterUser(user);// 방에 유저 정보 설정
-			
+			gameRoom.enterUser(user);// 방에 유저 정보 설정			
 			
 			if(roomManager.roomCount() == 0) {// 최초로 방을 방 리스트에 추가
 				gameRoom.setRoomNum(sock.getPort() + sock.getLocalPort());// 방번호 설정
 				System.out.println("방 번호 설정 : " + gameRoom.getRoomNum());
 				roomManager.createRoom(gameRoom);// 방생성
 				System.out.println("방 생성 후 roomCount : " + roomManager.roomCount());
-			}else if(roomManager.roomList.get(roomManager.roomCount() -1).GetUserSize() == 2){// 최근 방에 유저 수가 최대일때 마다 방 리스트에 추가
- CX				gameRoom = new GameRoom();
-//				gameRoom.setRoomNum(sock.getPort() + sock.getLocalPort());// 방번호 설정
-//				System.out.println("방 번호 설정 : " + gameRoom.getRoomNum());
-//				roomManager.createRoom(gameRoom);// 방생성
+			}else if(roomManager.roomList.get(roomManager.roomCount() -1).GetUserSize() == 2
+					&& users.size() > roomManager.roomCount() * 2){// 최근 방에 유저 수가 최대일때 마다 방 리스트에 추가
+				gameRoom = new GameRoom();
+				user.enterRoom(gameRoom);// 유저 방에입장
+				gameRoom.enterUser(user);// 방에 유저 정보 설정
+				gameRoom.setRoomNum(sock.getPort() + sock.getLocalPort());// 방번호 설정
+				System.out.println("방 번호 설정 : " + gameRoom.getRoomNum());
+				roomManager.createRoom(gameRoom);// 방생성
 				System.out.println("방 생성 후 roomCount : " + roomManager.roomCount());
 			}
 			
@@ -66,7 +68,7 @@ public class myServerSocket {
 			+ roomManager.roomList.get(i).GetUserSize());
 			}
 			
-			SendThread send = new SendThread(sock, users);
+			SendThread send = new SendThread(sock, users, roomManager);
 			send.start();
 		}
 	}
